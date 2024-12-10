@@ -1,0 +1,11 @@
+[
+    {
+        "user_id": 1,
+        "name": "Jakub Gożuk",
+        "nip": 1234567890,
+        "pesel": "12345678901",
+        "regon": 1111,
+        "password": "dfd33ed",
+        "status": ""
+    }
+]
