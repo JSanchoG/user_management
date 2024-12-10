@@ -6,7 +6,6 @@ import os
 
 FILE_USERS_PATH = "data/users.json"
 
-# Create non-existent directories
 if not os.path.exists("data"): os.makedirs("data")
 
 def add_user(user_data:dict):
@@ -121,7 +120,7 @@ def validate_regon(regon:str) -> bool:
         return checksum == int(regon[8])
     
     if len(regon) == 14:
-        if not validate_regon(regon[:9]):  # Validate first 9 digits
+        if not validate_regon(regon[:9]):
             return False
         weights = [2, 4, 8, 5, 0, 9, 7, 3, 6, 1, 2, 4, 8]
         checksum = sum(int(digit) * weight for digit, weight in zip(regon[:13], weights)) % 11
@@ -136,10 +135,10 @@ def generate_password() -> str:
     length = 12
     all_characters = string.ascii_letters + string.digits + string.punctuation
     password = [
-        random.choice(string.ascii_lowercase),  # Przynajmniej jedna mała litera
-        random.choice(string.ascii_uppercase),  # Przynajmniej jedna duża litera
-        random.choice(string.digits),           # Przynajmniej jedna cyfra
-        random.choice(string.punctuation)       # Przynajmniej jeden znak specjalny
+        random.choice(string.ascii_lowercase),
+        random.choice(string.ascii_uppercase),
+        random.choice(string.digits),
+        random.choice(string.punctuation)
     ]
     password += random.choices(all_characters, k=length - 4)
     random.shuffle(password)
@@ -156,13 +155,13 @@ def validate_password(password: str) -> bool:
     """
     if len(password) < 12:
         return False
-    if not re.search(r'[a-z]', password):  # Małe litery
+    if not re.search(r'[a-z]', password):
         return False
-    if not re.search(r'[A-Z]', password):  # Duże litery
+    if not re.search(r'[A-Z]', password):
         return False
-    if not re.search(r'[0-9]', password):  # Cyfry
+    if not re.search(r'[0-9]', password):
         return False
-    if not re.search(r'[!@#$%^&*(),.?":{}|<>_\-+=;`~]', password):  # Znaki specjalne
+    if not re.search(r'[!@#$%^&*(),.?":{}|<>_\-+=;`~]', password):
         return False
     return True
 
